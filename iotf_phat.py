@@ -1,3 +1,5 @@
+import sys
+import time
 try:
     import ibmiotf.application
     import ibmiotf.device
@@ -15,7 +17,7 @@ def processCommand(data):
   print("New Data: %s" % data)
 
 def commandCallback(cmd):
-  if cmd.command == "shutdown":
+    if cmd.command == "shutdown":
         if 'shutdown' not in cmd.data:
             print("Error incorrect shutdown command")
         else:
@@ -23,11 +25,11 @@ def commandCallback(cmd):
                 print("Shutdown received, goodbye!")
                 global shutdown_flag
                 shutdown_flag = True
-    elif cmd.command == "command":
+    elif cmd.command == "scroll":
         processCommand(cmd.data)
   
 try:
-    options = ibmiotf.device.ParseConfigFile("/home/pi/git/mqttbot/device.cfg")
+    options = ibmiotf.device.ParseConfigFile("device.cfg")
     client = ibmiotf.device.Client(options)
     client.commandCallback = commandCallback
     client.connect()
