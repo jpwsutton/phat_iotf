@@ -39,9 +39,11 @@ def startThread():
     threads.append(thread)
 
 def stopThreads():
+    global exitFlag
+    print "Asked to stop threads."
     exitFlag = 1
-    for t in threads:
-        t.join()
+    for thread in threads:
+        thread.join()
     print "All Threads finished."
 
 def addMessage(data):
