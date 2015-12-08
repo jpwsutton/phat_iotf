@@ -11,7 +11,7 @@ queueLock = threading.Lock()
 messageQueue = Queue.Queue(10)
 threads = []
 
-matrix_length = 11
+matrix_length = 3
 
 class displayThread (threading.Thread):
     def __init__(self, threadID, name, q):
