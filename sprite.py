@@ -70,6 +70,20 @@ face_chibbi_ugh    = ['01010010100',
                       '00000000000',
                       '00011110000']
 
+spriteMap = { 'face_normal_happy' : face_normal_happy,
+              'face_normal_tongue' : face_normal_tongue,
+              'face_normal_wink' : face_normal_wink,
+              'face_normal_sad' : face_normal_sad,
+              'face_normal_meh' : face_normal_meh,
+              'face_normal_shock' : face_normal_shock,
+              'face_chibbi_happy' : face_chibbi_happy,
+              'face_chibbi_sad' : face_chibbi_sad,
+              'face_chibbi_shock' : face_chibbi_shock,
+              'face_chibbi_meh' : face_chibbi_meh,
+              'face_chibbi_dead' : face_chibbi_dead,
+              'face_chibbi_ugh' : face_chibbi_ugh
+              }
+
 # def setCell(row, col, cell):
 #     if cell == '0':
 #         scrollphat.set_pixel(col, row, 0)

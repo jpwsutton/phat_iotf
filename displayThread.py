@@ -4,6 +4,7 @@ import Queue
 import threading
 import scrollphat
 import time
+import sprite
 
 exitFlag = 0
 queueLock = threading.Lock()
@@ -49,7 +50,7 @@ def scrollText(text):
     """Scroll some text on the display once"""
     print("Displaying text: " + text)
     # Write the text to the display, the extra space is to make scrolling look better.
-    length = scrollphat.write_string(text + "  ")
+    length = scrollphat.write_string("   " + text)
     for i in range(length - matrix_length):
         scrollphat.scroll()
         time.sleep(0.1)
@@ -58,7 +59,10 @@ def scrollText(text):
 
 
 def displaySpriteFromName(spriteName):
+    """Uses the name of a sprite to display it"""
     print("Displaying sprite from name: "  + spriteName)
+    if spriteName in sprite.spriteMap:
+        displaySprite(sprite.spritemap[spriteName])
 
 def displaySprite(sprite):
     """Display a simple sprite on the matrix.
@@ -66,7 +70,7 @@ def displaySprite(sprite):
     print("Displaying Sprite: %s"  % sprite)
     for rowNum, row in enumerate(sprite):
         for colNum, cell in enumerate(row):
-            scrollphat.set_pixel(rowNum, colNum, int(cell))
+            scrollphat.set_pixel(colNum, rowNum, int(cell))
     scrollphat.update()
 
 
