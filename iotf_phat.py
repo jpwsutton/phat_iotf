@@ -41,11 +41,11 @@ def commandCallback(cmd):
                 global shutdown_flag
                 shutdown_flag = True
     elif cmd.command == "text":
-        displayThread.addMessage({'text' : cmd.data.text})
+        displayThread.addMessage({'text' : cmd.data})
     elif cmd.command == "sprite":
-        displayThread.addMessage({'sprite' : cmd.data.sprite})
+        displayThread.addMessage({'sprite' : cmd.data})
     elif cmd.command == "spriteName":
-        displayThread.addMessage({'spriteName' : cmd.data.spriteName})
+        displayThread.addMessage({'spriteName' : cmd.data})
 
 
 # Start the display thread and send the startup messages
