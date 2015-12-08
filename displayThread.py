@@ -10,6 +10,8 @@ queueLock = threading.Lock()
 messageQueue = Queue.Queue(10)
 threads = []
 
+matrix_length = 11
+
 class displayThread (threading.Thread):
     def __init__(self, threadID, name, q):
         threading.Thread.__init__(self)
@@ -42,14 +44,18 @@ def standby_process(threadName, q):
 
 def scrollText(text):
     print("Displaying text: " + text)
+    # Write the text to the display, the extra space is to make scrolling look better.
+    length = scrollphat.write_string(text + "  ")
+    for i in range(length - matrix_length):
+        scrollphat.scroll()
+        time.sleep(0.1)
+    scrollphat.clear()
 
 def displaySpriteFromName(spriteName):
     print("Displaying sprite from name: "  + spriteName)
 
 def displaySprite(sprite):
     print("Displaying Sprite: %s"  % sprite)
-
-
 
 def startThread():
     thread = displayThread(1, "displayThread-1", messageQueue)

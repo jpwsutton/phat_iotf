@@ -1,6 +1,5 @@
 import sys
 import time
-import scrollphat
 import displayThread
 import sprite
 
@@ -11,7 +10,7 @@ except:
     print("Could not find the IBM IoTF library")
     sys.exit()
 
-matrix_length = 11
+
 shutdown_flag = False
 
 def myAppEventCallback(event):
@@ -19,17 +18,6 @@ def myAppEventCallback(event):
 
 def processCommand(data):
   print("New Data: %s" % data)
-
-
-def scrollText(data):
-    scrollphat.clear()
-    length = scrollphat.write_string(data['message'] + " ")
-    scrollcount = int(data['scrollcount'])
-    for i in range(scrollcount):
-        for x in range(length - matrix_length):
-            scrollphat.scroll()
-            time.sleep(0.1)
-    scrollphat.clear()
 
 def commandCallback(cmd):
     if cmd.command == "shutdown":
