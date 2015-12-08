@@ -33,12 +33,12 @@ def standby_process(threadName, q):
         time.sleep(1)
 
 
-def startThread:
+def startThread():
     thread = displayThread(1, "displayThread-1", messageQueue)
     thread.start()
     threads.append(thread)
 
-def stopThreads:
+def stopThreads():
     exitFlag = 1
     for t in threads:
         t.join()

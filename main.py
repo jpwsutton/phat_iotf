@@ -1,12 +1,12 @@
 import displayThread
 import time
 
-startThread()
+displayThread.startThread()
 nameList = ["One", "Two", "Three", "Four", "Five"]
 for word in nameList:
-    addMessage(word)
+    displayThread.addMessage(word)
 
 time.sleep(10)
-stopThreads()
+displayThread.stopThreads()
 
 print "Done."
