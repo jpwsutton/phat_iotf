@@ -2,6 +2,7 @@
 
 import Queue
 import threading
+import scrollphat
 import time
 
 exitFlag = 0
@@ -28,9 +29,26 @@ def standby_process(threadName, q):
             data = q.get()
             queueLock.release()
             print "%s processing %s" % (threadName, data)
+            if 'text' in data:
+                scrollText(data['text'])
+            if 'spriteName' in data:
+                displaySpriteFromName(data['spriteName'])
+            if 'sprite' in data:
+                displaySprite(data['sprite'])
         else:
             queueLock.release()
         time.sleep(1)
+
+
+def scrollText(text):
+    print("Displaying text: " + text)
+
+def displaySpriteFromName(spriteName):
+    print("Displaying sprite from name: "  + spriteName)
+
+def displaySprite(sprite):
+    print("Displaying Sprite: %s"  % sprite)
+
 
 
 def startThread():
