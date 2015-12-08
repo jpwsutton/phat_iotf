@@ -33,16 +33,20 @@ def standby_process(threadName, q):
             print "%s processing %s" % (threadName, data)
             if 'text' in data:
                 scrollText(data['text'])
+                time.sleep(1)
             if 'spriteName' in data:
                 displaySpriteFromName(data['spriteName'])
+                time.sleep(1)
             if 'sprite' in data:
                 displaySprite(data['sprite'])
+                time.sleep(1)
         else:
             queueLock.release()
         time.sleep(1)
 
 
 def scrollText(text):
+    """Scroll some text on the display once"""
     print("Displaying text: " + text)
     # Write the text to the display, the extra space is to make scrolling look better.
     length = scrollphat.write_string(text + "  ")
@@ -51,11 +55,22 @@ def scrollText(text):
         time.sleep(0.1)
     scrollphat.clear()
 
+
+
 def displaySpriteFromName(spriteName):
     print("Displaying sprite from name: "  + spriteName)
 
 def displaySprite(sprite):
+    """Display a simple sprite on the matrix.
+    The sprite should be an array of 5 binary strings"""
     print("Displaying Sprite: %s"  % sprite)
+    for rowNum, row in enumerate(sprite):
+        for colNum, cell in enumerate(row):
+            scrollphat.set_pixel(rowNum, colNum, int(cell))
+    scrollphat.update()
+
+
+
 
 def startThread():
     thread = displayThread(1, "displayThread-1", messageQueue)
