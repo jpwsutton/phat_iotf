@@ -1,10 +1,8 @@
 import sys
 import time
 import scrollphat
-from Queue import Queue
-from threading import thread
-
-
+import displayThread
+import sprite
 
 try:
     import ibmiotf.application
@@ -14,19 +12,6 @@ except:
     sys.exit()
 
 matrix_length = 11
-shutdown_flag = False
-
-myQueue = Queue()
-
-def displayThread(i, q):
-    """This is the worker thread function.
-    It processes items in the queue one after
-    another. This thread will go in an 
-    infinite loop and only exit with the main
-    thread ends.
-    """
-    while True:
-        
 
 
 def myAppEventCallback(event):
@@ -55,11 +40,21 @@ def commandCallback(cmd):
                 print("Shutdown received, goodbye!")
                 global shutdown_flag
                 shutdown_flag = True
-    elif cmd.command == "scroll":
-        scrollText(cmd.data)
-    elif cmd.command == "clear":
-        scrollphat.clear()
-  
+    elif cmd.command == "text":
+        displayThread.addMessage({'text' : cmd.data})
+    elif cmd.command == "sprite":
+        displayThread.addMessage({'sprite' : 'sprite: ' + cmd.data})
+
+
+# Start the display thread and send the startup messages
+displayThread.startThread()
+startupMsg = {'text' : 'Hello World!'}
+startupSprite = {'sprite' : sprite.face_chibbi_happy}
+displayThread.addMessage(startupMsg)
+displayThread.addMessage(startupSprite)
+
+
+# Connect to IoTF
 try:
     options = ibmiotf.device.ParseConfigFile("device.cfg")
     client = ibmiotf.device.Client(options)
@@ -69,19 +64,17 @@ except Exception as e:
     print("Could not connect: %s" % str(e))
     sys.exit()
 
-length = scrollphat.write_string("Connected")
-for x in range(length - matrix_length):
-    scrollphat.scroll()
-    time.sleep(0.1)
+# Send 'Connected' Message to display
+displayThread.addMessage({'text' : 'Connected.'})
 
-q = Queue.Queue()
-    
+
+
 while True:
     if shutdown_flag is True:
         print("Shutdown Flag detected, goodbye")
+        displayThread.addMessage({'text' : 'Goodbye!'})
+        displayThread.stopThreads();
         client.disconnect()
         sys.exit(0)
     else:
-        time.sleep(2)
-print("IoTF pHat Controller")
-
+        time.sleep(1)
