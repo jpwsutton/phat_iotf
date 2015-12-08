@@ -44,6 +44,7 @@ def standby_process(threadName, q):
         else:
             queueLock.release()
         time.sleep(1)
+    scrollphat.clear()
 
 
 def scrollText(text):
@@ -54,15 +55,12 @@ def scrollText(text):
     for i in range(length - matrix_length):
         scrollphat.scroll()
         time.sleep(0.1)
-    scrollphat.clear()
-
-
 
 def displaySpriteFromName(spriteName):
     """Uses the name of a sprite to display it"""
     print("Displaying sprite from name: "  + spriteName)
     if spriteName in sprite.spriteMap:
-        displaySprite(sprite.spritemap[spriteName])
+        displaySprite(sprite.spriteMap[spriteName])
 
 def displaySprite(sprite):
     """Display a simple sprite on the matrix.

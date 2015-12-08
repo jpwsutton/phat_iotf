@@ -63,6 +63,7 @@ while True:
     if shutdown_flag is True:
         print("Shutdown Flag detected, goodbye")
         displayThread.addMessage({'text' : 'Goodbye!'})
+        time.sleep(2)
         displayThread.stopThreads();
         client.disconnect()
         sys.exit(0)

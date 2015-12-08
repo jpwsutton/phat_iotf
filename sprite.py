@@ -83,24 +83,3 @@ spriteMap = { 'face_normal_happy' : face_normal_happy,
               'face_chibbi_dead' : face_chibbi_dead,
               'face_chibbi_ugh' : face_chibbi_ugh
               }
-
-# def setCell(row, col, cell):
-#     if cell == '0':
-#         scrollphat.set_pixel(col, row, 0)
-#     else:
-#         scrollphat.set_pixel(col, row, 1)
-#
-# # Displays a sprite defined in an array of 5
-# def displaySprite(sprite):
-#     for rowNum, row in enumerate(sprite):
-#         for colNum, cell in enumerate(row):
-#             setCell(rowNum, colNum, cell)
-#     scrollphat.update()
-#
-# faces = [face_chibbi_happy, face_chibbi_sad, face_chibbi_shock, face_chibbi_meh, face_chibbi_dead, face_chibbi_ugh]
-# scrollphat.clear()
-# for face in faces:
-#     displaySprite(face)
-#     time.sleep(2)
-#
-# scrollphat.clear()
