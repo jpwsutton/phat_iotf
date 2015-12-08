@@ -12,7 +12,7 @@ except:
     sys.exit()
 
 matrix_length = 11
-
+shutdown_flag = False
 
 def myAppEventCallback(event):
     print("Received live data from %s (%s) sent at %s: hello%s x=%s" % (event.deviceId, event.deviceType, event.timestamp.strftime("%H:%M:%S"), data['hello'], data['x']))
